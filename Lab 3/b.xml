@@ -1,0 +1,7 @@
+﻿<highinflation>
+	{let $d:=doc("mondial.xml")
+	for $n in $d/mondial/country
+	where $n/inflation>10
+	order by $n/inflation
+	return ($n/name, $n/inflation)}
+</highinflation>

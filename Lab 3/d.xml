@@ -1,0 +1,7 @@
+﻿let $d:=doc("mondial.xml")
+let $airport:=$d/mondial/airport
+let $country:=$d/mondial/country
+for $a in $airport
+for $c in $country
+where data($c/@car_code) = data($a/@country)
+return <Airport name = '{$a/name}' code = '{$a/@iatacode}' country = '{$c/name}'/>

@@ -1,0 +1,13 @@
+﻿<manyairports>
+	{let $d:=doc("mondial.xml")
+	let $airport:=$d/mondial/airport
+	let $country:=$d/mondial/country
+
+	for $c in $country
+	let $a:=$airport[@country=$c/@car_code]
+
+	return
+	if (count($a) > 25)
+	then <country name = '{$c/name}' count = '{count($a)}'/>
+	else ()}
+</manyairports>

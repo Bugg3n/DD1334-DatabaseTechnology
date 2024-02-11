@@ -1,0 +1,7 @@
+﻿let $d:=doc("mondial.xml")
+for $x in $d//country
+where $x/population<200000000 and="" $x=""/population>300000000
+return <country> {$x/@car_code}</country>
+
+<!--The population contains multiple values with multiple measurement times. So this gives all ocuntries
+where the population has been below 200000000 at one specific point in time and above 300000000 at another time.-->
