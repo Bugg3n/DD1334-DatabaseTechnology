@@ -1,0 +1,141 @@
+1. 
+Select Name from Country Where Population < 1000;
+
+Holy See
+Cocos Islands
+Pitcairn
+
+2.
+Select Name AS CountryName, Area, Population
+From Country
+Where Population < 1000;
+
+CountryName    Area  Population
+-------------  ----  ----------
+Holy See       0.44  842
+Cocos Islands  14    596
+Pitcairn       47    56
+
+3.
+sqlite> Select Name, Population, Area
+   ...> From Country
+   ...> Where population > 1000 and population < 2000 and area >= 1;
+
+Name      Population  Area
+--------  ----------  -----
+Svalbard  1872        62049
+Niue      1611        260
+Tokelau   1383        12
+
+4.
+sqlite> Select Code
+   ...> From Country
+   ...> where name = "Norway";
+Code
+----
+N
+
+5. 
+sqlite> select city.name
+   ...> from city, country
+   ...> where code = city.country and country.name = "Sweden" and city.population > 500000;
+Göteborg
+Stockholm
+
+6.
+sqlite> select name, population, elevation
+   ...> from city
+   ...> where elevation < 0;
+Astrakhan|527345|-28
+Lelystad|76252|-3
+Almere|196244|-3
+Babol|250217|-2
+Baku|2150800|-28
+Atyrau|196494|-20
+Aktau|181526|-8
+New Orleans|343829|-2
+David|144858|-6
+Georgetown|118363|-2
+
+7.
+sqlite> select SUM(city.population) AS total, AVG(city.population) AS average, MIN(city.population) AS minimum, MAX(city.population) AS maximum
+   ...> FROM city
+   ...> Where elevation < 0;
+total    average   minimum  maximum
+-------  --------  -------  -------
+4185928  418592.8  76252    2150800
+
+8.
+sqlite> Select name
+   ...> from city
+   ...> where name LIKE "LOS%" or name LIKE "%HOLM"
+   ...> except
+   ...> select name
+   ...> from city
+   ...> where name LIKE "%IS";
+Name
+-----------
+Los Angeles
+Los Teques
+Stockholm
+
+
+sqlite> select name from city
+   ...> where (name LIKE "LOS%" or name LIKE "%HOLM") and (name NOT LIKE "%IS");
+Name
+-----------
+Los Angeles
+Los Teques
+Stockholm
+
+Yes, brackets do matter. 
+If we would have written "(name like los) or (name like holm and not like is) 
+we would have a diffrent result.  
+
+9.
+
+sqlite> select name, population
+   ...> from country
+   ...> order by population DESC
+   ...> limit 5;
+Name           Population
+-------------  ----------
+China          1360720000
+India          1210854977
+United States  318857056
+Indonesia      252124458
+Pakistan       207776954
+
+10.
+sqlite> Select country.name AS Name, city.name AS Name, elevation
+   ...> from city, country
+   ...> where code = city.country and Elevation IS NOT NULL
+   ...> Order by elevation ASC
+   ...> Limit 5;
+Name        Name       Elevation
+----------  ---------  ---------
+Russia      Astrakhan  -28
+Azerbaijan  Baku       -28
+Kazakhstan  Atyrau     -20
+Kazakhstan  Aktau      -8
+Panama      David      -6
+
+11.
+sqlite> Select Name
+   ...> from city
+   ...> where name LIKE "%X"
+   ...> UNION
+   ...> select Name
+   ...> from country
+   ...> where name LIKE "Y%";
+Name
+--------
+Bordeaux
+Halifax
+Jizzax
+Phoenix
+Sfax
+Yemen
+
+
+
