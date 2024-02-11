@@ -1,0 +1,44 @@
+1
+a)
+
+CREATE VIEW PopData AS
+SELECT citypops.year AS year, citypops.city AS name, citypops.population AS population,citypops.country AS country, longitude, latitude, elevation, agriculture, service, industry, inflation
+FROM citypops
+LEFT JOIN city 
+ON citypops.city = city.name AND citypops.country = city.country
+LEFT JOIN economy
+ON citypops.country = economy.country;
+
+CREATE VIEW PopDataStockholm AS
+SELECT citypops.year AS year, citypops.city AS name, citypops.population AS population,citypops.country AS country, longitude, latitude, elevation, agriculture, service, industry, inflation
+FROM citypops
+LEFT JOIN city 
+ON citypops.city = city.name AND citypops.country = city.country
+LEFT JOIN economy
+ON citypops.country = economy.country
+WHERE citypops.city LIKE "Stockholm";
+
+b)
+
+Since we did not extract a lot of data from the view, a virtual view
+didnt take that much computing power. A materialized view however would take
+a lot more space on the computer.
+
+2)
+
+b) 
+
+We do not have data from every city at every year, so the plot will vary a
+lot because of this. One year we might have very little data, so we might
+get a very low total population.
+
+
+
+f) 
+
+Since the average is so low, the vast majority of cities is still very small,
+while a few is growing very rapidly.
+
+g)
+
+It seems as cities near the equator has a higher porportion av agriculture GDP
